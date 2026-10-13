@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const entries = Object.entries(import.meta.glob('../../data/noticias/*.md', { eager: true }))
+	.map(([path, module]) => ({ ...module.frontmatter, slug: path.split('/').pop()?.replace(/\.md$/, '') }))
+	.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
+---
+<Layout title="Actualidad | Hípica Militar de Logroño" description="Noticias, avisos y eventos de la Hípica Militar de Logroño.">
+	<main class="page">
+		<a class="back" href="/">← Volver al inicio</a>
+		<p class="eyebrow">LO QUE PASA EN EL CLUB</p>
+		<h1>Actualidad<br /><em>de la Hípica.</em></h1>
+		{entries.length ? <div class="list">{entries.map((entry) => <a href={`/noticias/${entry.slug}/`}><span>{entry.category ?? 'Actualidad'}{entry.date ? ` · ${new Date(entry.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}` : ''}</span><h2>{entry.title}</h2><b>↗</b></a>)}</div> : <p class="empty">Todavía no hay noticias publicadas. Vuelve pronto.</p>}
+	</main>
+</Layout>
+<style>
+	:global(body){background:#fbfaf6;color:#24372c;font-family:Arial,Helvetica,sans-serif;margin:0}.page{padding:56px max(8%,calc((100% - 1050px)/2)) 100px;min-height:70vh}.back{display:inline-block;color:#344a3b;text-decoration:none;font-size:11px;margin-bottom:65px}.eyebrow{font-size:9px;letter-spacing:2px;color:#77796e}.page h1{font:normal clamp(50px,8vw,82px)/.98 Georgia,serif;letter-spacing:-2px;margin:18px 0 56px}.page h1 em{font-weight:normal;color:#b96b46}.list{border-top:1px solid #d8d7cc}.list>a{display:block;position:relative;padding:25px 50px 25px 0;border-bottom:1px solid #d8d7cc;color:#24372c;text-decoration:none}.list span{font-size:9px;letter-spacing:.9px;text-transform:uppercase;color:#77796e}.list h2{font:normal 26px Georgia,serif;margin:12px 0 0}.list b{position:absolute;right:10px;bottom:28px;color:#b96b46}.empty{color:#77796e;font:22px Georgia,serif}
+</style>

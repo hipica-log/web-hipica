@@ -1,46 +1,23 @@
-# Astro Starter Kit: Basics
+# Hípica Militar de Logroño
+
+Web hecha con Astro. El panel de Decap CMS está disponible en `/admin/` y permite publicar noticias en `src/data/noticias`; la portada y el archivo de actualidad leen esas entradas al generar el sitio.
+
+## Desarrollo
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Publicar noticias con Decap CMS
 
-## 🚀 Project Structure
+El panel usa `git-gateway` y Netlify Identity. Para que la edición remota funcione, despliega el sitio en Netlify, conecta el repositorio, activa Identity y Git Gateway en la configuración del sitio, e invita a las personas que podrán editar. El CMS guarda los cambios en la rama `main` del repositorio conectado a Netlify.
 
-Inside of your Astro project, you'll see the following folders and files:
+En local puedes revisar el sitio con `npm run dev`; la autenticación de producción requiere la configuración de Netlify. Las noticias nuevas se guardan como Markdown y se publican en `/noticias/<slug>/`.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+## Compilar
+
+```sh
+npm run build
+npm run preview
 ```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

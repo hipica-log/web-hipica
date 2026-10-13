@@ -1,11 +1,78 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const newsModules = import.meta.glob('../data/noticias/*.md', { eager: true });
+const news = Object.entries(newsModules)
+	.map(([path, module]) => ({
+		...(module.frontmatter ?? {}),
+		slug: path.split('/').pop()?.replace(/\.md$/, ''),
+	}))
+	.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime())
+	.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Hípica Militar de Logroño | Disfruta del caballo">
+	<header class="site-header">
+		<a class="brand" href="/" aria-label="Hípica Militar de Logroño, inicio">
+			<span class="brand-mark" aria-hidden="true">HML</span>
+			<span><strong>HÍPICA MILITAR</strong><small>LOGROÑO</small></span>
+		</a>
+		<nav aria-label="Navegación principal">
+			<a href="#club">El club</a>
+			<a href="#actividades">Actividades</a>
+			<a href="#actualidad">Actualidad</a>
+			<a class="nav-contact" href="#contacto">Ven a conocernos <span aria-hidden="true">↗</span></a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero">
+			<div class="hero-copy">
+				<p class="eyebrow"><span></span> NATURALEZA · DEPORTE · COMUNIDAD</p>
+				<h1>El caballo.<br />El campo.<br /><em>Tu lugar.</em></h1>
+				<p class="intro">Un espacio para aprender, compartir y disfrutar del mundo ecuestre a tu ritmo.</p>
+				<a class="button" href="#actividades">Descubre el club <span aria-hidden="true">→</span></a>
+				<div class="hero-note"><span class="note-line"></span><span>Una pasión que se vive<br />todos los días</span></div>
+			</div>
+			<div class="hero-image" role="img" aria-label="Paisaje ecuestre al atardecer">
+				<div class="image-caption"><span>01 / 03</span><span>Vivir el caballo, sin prisa</span></div>
+			</div>
+			<div class="hero-index"><strong>HÍPICA MILITAR</strong> <span>·</span> LOGROÑO</div>
+		</section>
+
+		<section class="welcome" id="club">
+			<p class="eyebrow">BIENVENIDOS A LA HÍPICA MILITAR</p>
+			<h2>Más que montar.<br /><em>Una forma de estar.</em></h2>
+			<div class="welcome-body"><p>Creemos que el vínculo con el caballo se construye con tiempo, cuidado y respeto. En la Hípica Militar de Logroño encontrarás un lugar para empezar, mejorar y disfrutar en buena compañía.</p><a href="#contacto" class="text-link">Conoce nuestro club <span>↗</span></a></div>
+		</section>
+
+		<section class="activities" id="actividades">
+			<div class="section-heading"><div><p class="eyebrow">ENCUENTRA TU CAMINO</p><h2>Hay muchas formas<br />de <em>disfrutarlo.</em></h2></div><p>Desde tu primera clase hasta los días que solo piden campo abierto.</p></div>
+			<div class="activity-grid">
+				<article class="activity-card riding"><span class="card-number">01</span><div><p>APRENDE A TU RITMO</p><h3>Escuela<br />de equitación</h3><a href="#contacto" aria-label="Consultar escuela de equitación">↗</a></div></article>
+				<article class="activity-card horse"><span class="card-number">02</span><div><p>EL CUIDADO TAMBIÉN ES PARTE</p><h3>Vida de<br />cuadra</h3><a href="#contacto" aria-label="Consultar vida de cuadra">↗</a></div></article>
+				<article class="activity-card community"><span class="card-number">03</span><div><p>MUCHO MÁS QUE CABALLOS</p><h3>Un club<br />para compartir</h3><a href="#contacto" aria-label="Consultar el club">↗</a></div></article>
+			</div>
+		</section>
+
+		<section class="news" id="actualidad">
+			<div class="section-heading"><div><p class="eyebrow">LO QUE PASA EN EL CLUB</p><h2>La vida en<br /><em>la Hípica.</em></h2></div><a href="/noticias/" class="text-link">Toda la actualidad <span>↗</span></a></div>
+			{news.length > 0 ? <div class="news-grid">{news.map((item) => <a class="news-card" href={`/noticias/${item.slug}/`}><span class="news-meta">{item.category ?? 'Actualidad'} · {item.date ? new Date(item.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}</span><h3>{item.title}</h3><span class="news-arrow">↗</span></a>)}</div> : <div class="empty-news"><p>Pronto compartiremos novedades del club.</p><span>Las noticias se publican desde el panel de administración.</span></div>}
+		</section>
+
+		<section class="visit" id="contacto"><p class="eyebrow">TU PRÓXIMO PLAN EMPIEZA AQUÍ</p><h2>Nos vemos<br /><em>en Logroño.</em></h2><a class="button light" href="#contacto">Escríbenos <span>↗</span></a><span class="visit-decoration" aria-hidden="true">HML</span></section>
+	</main>
+	<footer><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true">HML</span><span><strong>HÍPICA MILITAR</strong><small>LOGROÑO</small></span></a><p>Un lugar para disfrutar del caballo.</p><a href="/admin/">Acceso equipo</a><span>© {new Date().getFullYear()} Hípica Militar de Logroño</span></footer>
 </Layout>
+
+<style>
+	:global(:root){--ink:#24372c;--green:#344a3b;--cream:#f4f1e9;--paper:#fbfaf6;--rust:#b96b46;--muted:#77796e;--serif:Georgia,'Times New Roman',serif;--sans:Arial,Helvetica,sans-serif}
+	:global(*){box-sizing:border-box}:global(html){scroll-behavior:smooth}:global(body){margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+	.site-header{height:88px;padding:0 7.2%;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:relative;z-index:2}.brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none}.brand-mark{width:39px;height:39px;border:1px solid #a1a391;border-radius:50%;display:grid;place-items:center;font:italic 16px var(--serif);letter-spacing:-2px}.brand strong,.brand small{display:block;letter-spacing:2.2px}.brand strong{font-size:12px}.brand small{font-size:8px;margin-top:3px}.site-header nav{display:flex;align-items:center;gap:35px}.site-header nav a{font-size:11px;color:var(--ink);text-decoration:none}.site-header nav .nav-contact{padding:12px 16px;border:1px solid #c8c6bb}.nav-contact span{margin-left:12px;color:var(--rust)}
+	.hero{min-height:625px;background:var(--cream);position:relative;display:grid;grid-template-columns:48% 52%;padding-left:11.1%;overflow:hidden}.hero-copy{padding-top:88px;position:relative;z-index:1}.eyebrow{font-size:9px;font-weight:bold;letter-spacing:2.1px;color:#73796c;margin:0 0 25px}.eyebrow span{display:inline-block;background:var(--rust);width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:1px}.hero h1{font:normal clamp(58px,7vw,94px)/.94 var(--serif);letter-spacing:-4px;margin:0;color:var(--ink)}h1 em,h2 em{font-weight:normal;color:var(--rust)}.intro{color:#65695f;line-height:1.8;font-size:13px;max-width:280px;margin:26px 0 23px}.button{display:inline-flex;align-items:center;gap:38px;padding:15px 19px;background:var(--green);color:white;text-decoration:none;font-size:10px;letter-spacing:.3px}.button span{font-size:16px}.hero-image{background:linear-gradient(180deg,rgba(26,37,29,.03),rgba(26,37,29,.26)),url('https://images.unsplash.com/photo-1534307677479-7d6c9f58eae2?auto=format&fit=crop&w=1500&q=85') center 46%/cover;min-height:625px;position:relative}.image-caption{position:absolute;bottom:30px;left:35px;right:35px;display:flex;justify-content:space-between;color:white;font-size:9px;letter-spacing:.7px}.hero-note{display:flex;align-items:center;gap:13px;margin-top:48px;color:#72756b;font:italic 12px/1.45 var(--serif)}.note-line{width:40px;height:1px;background:var(--rust)}.hero-index{position:absolute;bottom:28px;left:7.2%;font-size:8px;letter-spacing:1.6px;color:#85867a}.hero-index strong{color:var(--green)}.hero-index span{padding:0 8px;color:var(--rust)}
+	.welcome{padding:105px 17% 112px;display:grid;grid-template-columns:1fr 1fr;column-gap:10%;align-items:start}.welcome>.eyebrow{grid-column:1/-1;margin-bottom:24px}.welcome h2,.section-heading h2,.visit h2{font:normal clamp(38px,4.5vw,59px)/1.04 var(--serif);letter-spacing:-1.8px;margin:0}.welcome-body{padding-top:8px}.welcome-body p{font-size:13px;line-height:1.9;color:#707268;margin:0 0 24px;max-width:370px}.text-link{font-size:10px;letter-spacing:.4px;color:var(--ink);text-decoration:none;border-bottom:1px solid #b8b8aa;padding-bottom:8px}.text-link span{color:var(--rust);padding-left:14px;font-size:14px}
+	.activities{background:#eeece4;padding:90px 11.1% 100px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px}.section-heading .eyebrow{margin-bottom:20px}.section-heading>p{font-size:12px;line-height:1.8;color:var(--muted);max-width:225px;margin:0 4% 7px 0}.activity-grid{display:grid;grid-template-columns:1.12fr 1fr 1fr;gap:13px}.activity-card{height:330px;position:relative;color:white;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:space-between;padding:20px}.activity-card:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,34,26,.1),rgba(21,34,26,.72))}.activity-card>*{position:relative}.activity-card.riding{background-image:url('https://images.unsplash.com/photo-1534307677479-7d6c9f58eae2?auto=format&fit=crop&w=900&q=80')}.activity-card.horse{background-image:url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=900&q=80')}.activity-card.community{background-image:url('https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=900&q=80')}.card-number{font:italic 13px var(--serif);opacity:.8}.activity-card div{display:grid;grid-template-columns:1fr auto;align-items:end}.activity-card div p{grid-column:1/-1;font-size:8px;letter-spacing:1.4px;margin:0 0 12px;opacity:.85}.activity-card h3{font:normal 27px/1.06 var(--serif);margin:0}.activity-card div a{color:white;text-decoration:none;font-size:20px}
+	.news{padding:100px 11.1% 110px}.news .section-heading{align-items:end}.news .section-heading .text-link{margin:0 3% 8px 0}.news-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #d8d7cc}.news-card{padding:25px 24px 25px 0;border-bottom:1px solid #d8d7cc;position:relative;text-decoration:none;color:var(--ink);min-height:140px}.news-card+.news-card{padding-left:24px;border-left:1px solid #d8d7cc}.news-meta{font-size:9px;letter-spacing:.8px;color:#77796e;text-transform:uppercase}.news-card h3{font:normal 23px/1.18 var(--serif);margin:17px 30px 0 0}.news-arrow{position:absolute;right:10px;bottom:27px;color:var(--rust)}.empty-news{border-top:1px solid #d8d7cc;border-bottom:1px solid #d8d7cc;padding:28px 0;color:#73766b}.empty-news p{font:normal 22px var(--serif);margin:0 0 9px}.empty-news span{font-size:11px}
+	.visit{background:var(--green);color:#f8f5ec;padding:78px 11.1% 83px;position:relative;overflow:hidden}.visit .eyebrow{color:#c4c6b7;margin-bottom:22px}.visit h2{font-size:54px;position:relative;z-index:1}.visit h2 em{color:#d3936c}.button.light{background:#f4f1e9;color:var(--green);margin-top:26px}.visit-decoration{position:absolute;right:12%;top:-75px;color:rgba(255,255,255,.035);font:italic 350px var(--serif)}footer{padding:27px 7.2%;display:flex;align-items:center;justify-content:space-between;background:#293a30;color:#d7d8ce}footer p,footer>span,footer>a:not(.brand){font-size:9px;color:#c5c7bb}footer a:not(.brand){text-decoration:none}.footer-brand{color:#f4f1e9}.footer-brand .brand-mark{border-color:#717d70}
+	@media(max-width:760px){.site-header{height:73px;padding:0 6%}.site-header nav{gap:15px}.site-header nav>a:not(.nav-contact){display:none}.site-header nav .nav-contact{padding:10px;font-size:9px}.hero{padding:0;display:flex;flex-direction:column}.hero-copy{padding:62px 9% 45px}.hero h1{font-size:67px}.hero-image{min-height:360px}.hero-index{top:34px;bottom:auto;left:auto;right:7%;color:white;z-index:1}.hero-note{margin-top:32px}.welcome{padding:72px 9%;display:block}.welcome>.eyebrow{margin-bottom:22px}.welcome h2{font-size:46px}.welcome-body{margin-top:22px}.activities,.news{padding:72px 8%}.section-heading{align-items:start;gap:24px;flex-direction:column}.section-heading>p{margin:0}.activity-grid{grid-template-columns:1fr}.activity-card{height:320px}.news-grid{grid-template-columns:1fr}.news-card,.news-card+.news-card{padding:22px 30px 22px 0;border-left:0}.visit{padding:65px 9%}.visit h2{font-size:48px}footer{padding:25px 7%;display:grid;grid-template-columns:1fr auto;gap:18px}footer p{grid-column:1}footer>span{grid-column:1/-1}}
+</style>

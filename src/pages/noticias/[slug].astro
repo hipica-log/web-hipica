@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const modules = import.meta.glob('../../data/noticias/*.md', { eager: true });
+export function getStaticPaths() {
+	return Object.entries(modules).map(([path, entry]) => ({
+		params: { slug: path.split('/').pop()?.replace(/\.md$/, '') },
+		props: { entry },
+	}));
+}
+const { entry } = Astro.props;
+const { Content } = entry;
+const { title, date, category, thumbnail } = entry.frontmatter;
+---
+<Layout title={`${title} | Hípica Militar de Logroño`} description={title}>
+	<main class="article">
+		<a class="back" href="/noticias/">← Todas las noticias</a>
+		{thumbnail && <img class="cover" src={thumbnail} alt="" />}
+		<p class="eyebrow">{category ?? 'Actualidad'}{date ? ` · ${new Date(date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}` : ''}</p>
+		<h1>{title}</h1>
+		<div class="prose"><Content /></div>
+	</main>
+</Layout>
+<style>
+	:global(body){background:#fbfaf6;color:#24372c;font-family:Arial,Helvetica,sans-serif;margin:0}.article{max-width:850px;margin:auto;padding:50px 28px 100px;min-height:70vh}.back{display:block;color:#344a3b;text-decoration:none;font-size:11px;margin-bottom:42px}.cover{width:100%;max-height:440px;object-fit:cover;margin-bottom:40px}.eyebrow{font-size:9px;letter-spacing:1.5px;color:#77796e;text-transform:uppercase}.article h1{font:normal clamp(42px,7vw,70px)/1.04 Georgia,serif;letter-spacing:-1.5px;margin:18px 0 36px}.prose{font-size:15px;line-height:1.9;color:#555d53}.prose :global(h2),.prose :global(h3){font:normal 30px Georgia,serif;color:#24372c;margin-top:36px}.prose :global(img){max-width:100%}.prose :global(a){color:#a55838}
+</style>

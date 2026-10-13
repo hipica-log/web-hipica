@@ -1,7 +1,5 @@
 backend:
   name: git-gateway
-  # CRÍTICO: Cambia esto por el nombre exacto de tu Organización y repositorio
-  repo: hipica-log/web-hipica 
   branch: main
 
 media_folder: "public/imagenes/uploads"
@@ -10,7 +8,7 @@ public_folder: "/imagenes/uploads"
 collections:
   - name: "noticias"
     label: "Noticias y Avisos"
-    folder: "src/pages/noticias"
+    folder: "src/data/noticias"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
