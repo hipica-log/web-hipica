@@ -1,7 +1,7 @@
 backend:
-  name: github
+  name: git-gateway
   # CRÍTICO: Cambia esto por el nombre exacto de tu Organización y repositorio
-  repo: NombreOrganizacion/web-hipica 
+  repo: hipica-log/web-hipica 
   branch: main
 
 media_folder: "public/imagenes/uploads"
