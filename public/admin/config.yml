@@ -1,18 +1,21 @@
 backend:
-  name: git-gateway
-  branch: main # Cambia a 'master' si tu rama principal se llama así
+  name: github
+  # CRÍTICO: Cambia esto por el nombre exacto de tu Organización y repositorio
+  repo: NombreOrganizacion/web-hipica 
+  branch: main
 
-media_folder: "public/imagenes/uploads" # Dónde se guardan las fotos
-public_folder: "/imagenes/uploads" # Cómo se enlazan las fotos en la web
+media_folder: "public/imagenes/uploads"
+public_folder: "/imagenes/uploads"
 
 collections:
   - name: "noticias"
-    label: "Noticias"
-    folder: "src/pages/noticias" # Dónde se guardarán los archivos Markdown de las noticias
+    label: "Noticias y Avisos"
+    folder: "src/pages/noticias"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["General", "Equitación", "Tenis y Pádel", "Eventos"]}
       - {label: "Imagen destacada", name: "thumbnail", widget: "image", required: false}
       - {label: "Cuerpo de la noticia", name: "body", widget: "markdown"}
