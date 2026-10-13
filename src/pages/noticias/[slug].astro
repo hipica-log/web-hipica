@@ -1,8 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const modules = import.meta.glob('../../data/noticias/*.md', { eager: true });
 export function getStaticPaths() {
+	const modules = import.meta.glob('../../data/noticias/*.md', { eager: true });
 	return Object.entries(modules).map(([path, entry]) => ({
 		params: { slug: path.split('/').pop()?.replace(/\.md$/, '') },
 		props: { entry },
