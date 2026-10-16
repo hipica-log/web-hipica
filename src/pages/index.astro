@@ -1,0 +1,89 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import { SITE, I18N } from 'astrowind:config';
+import favIconSvg from '~/assets/favicons/favicon.svg';
+
+const metadata = {
+  title: 'Hípica de Logroño',
+  description: 'Conoce la Hípica de Logroño, sus instalaciones y su actividad ecuestre.',
+  ignoreTitleTemplate: true,
+};
+
+const organizationId = `${SITE?.site}/#organization`;
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE?.site}/#website`,
+    name: SITE?.name,
+    url: SITE?.site,
+    inLanguage: I18N?.language,
+    publisher: { '@id': organizationId },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': organizationId,
+    name: SITE?.name,
+    url: SITE?.site,
+    logo: new URL(favIconSvg.src, SITE?.site).toString(),
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <StructuredData slot="head" schema={structuredData} />
+
+  <Hero
+    id="inicio"
+    tagline="Hípica de Logroño"
+    actions={[
+      { variant: 'primary', text: 'Conoce las instalaciones', href: '/instalaciones' },
+      { text: 'Contacta con nosotros', href: '/contact' },
+    ]}
+  >
+    <Fragment slot="title">
+      Tradición ecuestre<br class="hidden sm:block" />
+      <span class="text-primary dark:text-blue-300"> en Logroño</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Te damos la bienvenida a la Hípica de Logroño. Descubre el centro, sus instalaciones y su actividad.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-100/70 via-background to-background dark:from-emerald-950/40 dark:via-background dark:to-background"
+      >
+      </div>
+    </Fragment>
+  </Hero>
+
+  <section class="px-4 py-12 sm:px-6 md:py-20">
+    <div class="mx-auto grid max-w-5xl gap-8 rounded-2xl border border-gray-200 bg-white/70 p-8 dark:border-slate-700 dark:bg-slate-900/50 md:grid-cols-[1fr_auto] md:items-center md:p-12">
+      <div>
+        <p class="mb-3 text-sm font-bold uppercase tracking-wider text-primary dark:text-blue-300">Nuestro centro</p>
+        <h2 class="mb-4 text-3xl font-bold tracking-tight text-heading dark:text-white sm:text-4xl">
+          Un lugar para acercarte al mundo del caballo
+        </h2>
+        <p class="max-w-2xl text-lg leading-relaxed text-muted dark:text-slate-300">
+          Explora la información sobre la Hípica de Logroño y conoce el espacio donde se desarrolla su actividad ecuestre.
+        </p>
+      </div>
+      <a
+        class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center font-semibold text-white transition hover:opacity-90"
+        href="/instalaciones"
+      >
+        Ver instalaciones
+      </a>
+    </div>
+  </section>
+
+  <CallToAction actions={[{ variant: 'primary', text: 'Escríbenos', href: '/contact' }]}>
+    <Fragment slot="title">¿Tienes alguna consulta?</Fragment>
+    <Fragment slot="subtitle">Ponte en contacto con la Hípica de Logroño.</Fragment>
+  </CallToAction>
+</Layout>

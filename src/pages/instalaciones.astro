@@ -1,0 +1,36 @@
+---
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Instalaciones',
+  description: 'Conoce las instalaciones de la Hípica de Logroño.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Instalaciones"
+  >
+    <Fragment slot="title">Nuestras instalaciones</Fragment>
+    <Fragment slot="subtitle">[Una o dos frases de presentación]</Fragment>
+  </Hero>
+
+  <Features2
+    title="Qué encontrarás"
+    items={[
+      { title: '[Pista 1]', description: '[Descripción breve]', icon: 'tabler:building' },
+      { title: '[Cuadras]', description: '[Descripción breve]', icon: 'tabler:building' },
+      { title: '[Otros servicios]', description: '[Descripción breve]', icon: 'tabler:building' },
+    ]}
+  />
+
+  <CallToAction
+    actions={[{ variant: 'primary', text: 'Contactar', href: '/contact' }]}
+  >
+    <Fragment slot="title">¿Quieres visitarnos?</Fragment>
+    <Fragment slot="subtitle">Consulta horarios y cómo llegar.</Fragment>
+  </CallToAction>
+</Layout>
