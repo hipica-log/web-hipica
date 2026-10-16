@@ -7,7 +7,7 @@ export const headerData = {
     { text: 'Noticias', href: getBlogPermalink() },
     { text: 'Contacto', href: getPermalink('/contact') },
   ],
-  actions: [{ text: 'Contactar', href: getPermalink('/contact') }],
+  actions: [],
 };
 
 export const footerData = {

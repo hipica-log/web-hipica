@@ -1,10 +1,9 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import { SITE, I18N } from 'astrowind:config';
 import favIconSvg from '~/assets/favicons/favicon.svg';
+import heroImage from '~/assets/images/hero-hipica.webp';
 
 const metadata = {
   title: 'Hípica de Logroño',
@@ -32,58 +31,109 @@ const structuredData = [
     logo: new URL(favIconSvg.src, SITE?.site).toString(),
   },
 ];
+
+const cards = [
+  {
+    title: 'Instalaciones',
+    description: 'Conoce los espacios de la Hípica de Logroño.',
+    href: '/instalaciones',
+    image: heroImage,
+    imageAlt: 'Caballo y cuidadora en una pista de equitación al aire libre',
+  },
+  {
+    title: 'Noticias',
+    description: 'Novedades y noticias del centro.',
+    href: '/blog',
+    icon: '✦',
+  },
+  {
+    title: 'Contacto',
+    description: 'Consulta la información de contacto.',
+    href: '/contact',
+    icon: '↗',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <StructuredData slot="head" schema={structuredData} />
 
-  <Hero
-    id="inicio"
-    tagline="Hípica de Logroño"
-    actions={[
-      { variant: 'primary', text: 'Conoce las instalaciones', href: '/instalaciones' },
-      { text: 'Contacta con nosotros', href: '/contact' },
-    ]}
-  >
-    <Fragment slot="title">
-      Tradición ecuestre<br class="hidden sm:block" />
-      <span class="text-primary dark:text-blue-300"> en Logroño</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Te damos la bienvenida a la Hípica de Logroño. Descubre el centro, sus instalaciones y su actividad.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div
-        class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-100/70 via-background to-background dark:from-emerald-950/40 dark:via-background dark:to-background"
-      >
-      </div>
-    </Fragment>
-  </Hero>
-
-  <section class="px-4 py-12 sm:px-6 md:py-20">
-    <div class="mx-auto grid max-w-5xl gap-8 rounded-2xl border border-gray-200 bg-white/70 p-8 dark:border-slate-700 dark:bg-slate-900/50 md:grid-cols-[1fr_auto] md:items-center md:p-12">
-      <div>
-        <p class="mb-3 text-sm font-bold uppercase tracking-wider text-primary dark:text-blue-300">Nuestro centro</p>
-        <h2 class="mb-4 text-3xl font-bold tracking-tight text-heading dark:text-white sm:text-4xl">
-          Un lugar para acercarte al mundo del caballo
-        </h2>
-        <p class="max-w-2xl text-lg leading-relaxed text-muted dark:text-slate-300">
-          Explora la información sobre la Hípica de Logroño y conoce el espacio donde se desarrolla su actividad ecuestre.
+  <section class="bg-[#1e3d2e] text-white">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
+      <div class="max-w-2xl">
+        <p class="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-[#e0b23b]">Logroño · La Rioja</p>
+        <h1 class="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+          Deporte, naturaleza y ocio en un mismo lugar
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
+          Te damos la bienvenida a la Hípica de Logroño. Descubre el centro, sus instalaciones y su actividad ecuestre.
         </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/instalaciones"
+            class="inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#1e3d2e] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Descubre la Hípica
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex min-h-12 items-center justify-center rounded-md border-2 border-white/80 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-[#1e3d2e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Contacto
+          </a>
+        </div>
       </div>
-      <a
-        class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center font-semibold text-white transition hover:opacity-90"
-        href="/instalaciones"
-      >
-        Ver instalaciones
-      </a>
+      <div class="overflow-hidden rounded-xl bg-[#315d45] shadow-2xl shadow-black/20">
+        <img
+          src={heroImage.src}
+          alt="Caballo y cuidadora en una pista de equitación al aire libre"
+          class="aspect-[4/3] h-full w-full object-cover"
+          width={heroImage.width}
+          height={heroImage.height}
+          fetchpriority="high"
+        />
+      </div>
     </div>
   </section>
 
-  <CallToAction actions={[{ variant: 'primary', text: 'Escríbenos', href: '/contact' }]}>
-    <Fragment slot="title">¿Tienes alguna consulta?</Fragment>
-    <Fragment slot="subtitle">Ponte en contacto con la Hípica de Logroño.</Fragment>
-  </CallToAction>
+  <section class="bg-[#f4f2e9] px-5 py-16 sm:px-8 sm:py-20 lg:py-24" aria-labelledby="discover-title">
+    <div class="mx-auto max-w-7xl">
+      <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Hípica de Logroño</p>
+      <h2 id="discover-title" class="mb-9 text-3xl font-extrabold tracking-tight text-[#1e3d2e] sm:text-4xl">
+        Descubre la Hípica
+      </h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        {cards.map((card) => (
+          <article class="overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-lg">
+            {card.image ? (
+              <img src={card.image.src} alt={card.imageAlt} class="h-48 w-full object-cover" width={card.image.width} height={card.image.height} loading="lazy" />
+            ) : (
+              <div class="flex h-48 items-center justify-center bg-[#dcd8c8] text-4xl font-light text-[#1e3d2e]/65" aria-hidden="true">
+                {card.icon}
+              </div>
+            )}
+            <div class="p-6">
+              <h3 class="text-2xl font-bold tracking-tight text-[#1e3d2e]">{card.title}</h3>
+              <p class="mt-2 min-h-12 leading-relaxed text-[#536158]">{card.description}</p>
+              <a href={card.href} class="mt-4 inline-flex font-semibold text-[#1e3d2e] underline decoration-[#1e3d2e]/50 underline-offset-4 hover:decoration-[#1e3d2e]">
+                Ver más <span class="ml-1" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-5 py-14 sm:px-8 sm:py-16" aria-labelledby="news-title">
+    <div class="mx-auto flex max-w-7xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 id="news-title" class="text-3xl font-extrabold tracking-tight text-[#1e3d2e] sm:text-4xl">Noticias y novedades</h2>
+        <p class="mt-3 max-w-2xl text-[#536158]">Consulta las noticias y novedades de la Hípica de Logroño.</p>
+      </div>
+      <a href="/blog" class="font-semibold text-[#1e3d2e] underline decoration-[#1e3d2e]/50 underline-offset-4 hover:decoration-[#1e3d2e]">
+        Ver todas las noticias <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
 </Layout>

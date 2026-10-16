@@ -86,6 +86,10 @@
   box-shadow: none;
 }
 
+#header.scroll.dark > div:first-child {
+  background-color: #1e3d2e;
+}
+
 #header.expanded nav {
   position: fixed;
   top: 70px;
