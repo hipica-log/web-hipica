@@ -19,7 +19,16 @@ export const footerData = {
       title: 'La Hípica',
       links: [
         { text: 'Instalaciones', href: getPermalink('/instalaciones') },
-        { text: 'Noticias', href: getBlogPermalink() },
+        { text: 'Hípica', href: getPermalink('/instalaciones') },
+        { text: 'Novedades', href: getBlogPermalink() },
+      ],
+    },
+    {
+      title: 'Actividades y ocio',
+      links: [
+        { text: 'Actividades Deportivas', href: getPermalink('/actividades-deportivas') },
+        { text: 'Ocio y Restauración', href: getPermalink('/ocio-restauracion') },
+        { text: 'Normativa', href: getPermalink('/normativa') },
       ],
     },
     {
@@ -39,5 +48,5 @@ export const footerData = {
     // { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://...' },
     // { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://...' },
   ],
-  footNote: `© ${new Date().getFullYear()} Hípica de Logroño. Todos los derechos reservados.`,
+  footNote: '© 2026 Todos los derechos reservados.',
 };
