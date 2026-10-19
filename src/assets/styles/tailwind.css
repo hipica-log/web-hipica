@@ -87,7 +87,7 @@
 }
 
 #header.scroll.dark > div:first-child {
-  background-color: #1e3d2e;
+  background-color: #234a68;
 }
 
 #header.expanded nav {
@@ -128,6 +128,15 @@
    CustomStyles.astro to change the colour. */
 #header nav .aw-link-active {
   @apply text-link;
+}
+
+/* Keep the expanded desktop menu readable over the dark blue header. */
+#header.dark nav a:not(.aw-link-active) {
+  color: rgb(245 248 251);
+}
+#header.dark nav a:hover,
+#header.dark nav .aw-link-active {
+  color: #edc85e;
 }
 
 .dd *:first-child {

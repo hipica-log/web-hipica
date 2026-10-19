@@ -72,7 +72,7 @@ const persistKey = `header-${Array.from(
     {...isSticky ? { 'data-aw-sticky-header': true } : {}}
     {...id ? { id } : {}}
   >
-    <div class:list={['absolute inset-0', { 'bg-[#1e3d2e]': isDark }]}></div>
+    <div class:list={['absolute inset-0', { 'bg-[#234a68]': isDark }]}></div>
     <div
       class:list={[
         'relative text-default py-3 px-3 lg:px-6 mx-auto w-full',
@@ -100,7 +100,7 @@ const persistKey = `header-${Array.from(
         aria-label="Main navigation"
       >
         <ul
-          class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-xl lg:text-[0.9375rem] tracking-[0.01rem] font-medium lg:justify-center"
+          class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-base lg:text-[0.8125rem] xl:text-sm tracking-normal font-medium lg:justify-center"
         >
           {
             links.map(({ text, href, links }) => (
@@ -109,7 +109,7 @@ const persistKey = `header-${Array.from(
                   <>
                     <button
                       type="button"
-                      class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
+                      class="px-2.5 py-3 flex items-center whitespace-nowrap"
                     >
                       {text}{' '}
                       <Icon
@@ -136,7 +136,7 @@ const persistKey = `header-${Array.from(
                 ) : (
                   <a
                     class:list={[
-                      'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
+                      'px-2.5 py-3 flex items-center whitespace-nowrap',
                       { 'aw-link-active': isActive(href) },
                     ]}
                     href={href}

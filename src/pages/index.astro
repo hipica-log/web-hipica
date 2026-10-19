@@ -4,6 +4,22 @@ import StructuredData from '~/components/common/StructuredData.astro';
 import { SITE, I18N } from 'astrowind:config';
 import favIconSvg from '~/assets/favicons/favicon.svg';
 import heroImage from '~/assets/images/hero-hipica.webp';
+import instalacionesImage from '~/assets/images/instalaciones-ilustracion.png';
+import hipicaImage from '~/assets/images/hipica-deporte.png';
+import actividadesImage from '~/assets/images/actividades-deportivas.png';
+import ocioImage from '~/assets/images/ocio-restauracion.png';
+import normativaImage from '~/assets/images/normativa-hipica.png';
+import contactoImage from '~/assets/images/contacto-hipica.png';
+import Image from '~/components/common/Image.astro';
+import { findImage } from '~/utils/images';
+import { findLatestPosts } from '~/utils/blog';
+import { getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
+
+const latestPosts = await findLatestPosts({ count: 3 });
+const latestPostsWithImages = await Promise.all(
+  latestPosts.map(async (post) => ({ post, image: await findImage(post.image) }))
+);
 
 const metadata = {
   title: 'Hípica de Logroño',
@@ -32,25 +48,55 @@ const structuredData = [
   },
 ];
 
-const cards = [
+const cards: {
+  title: string;
+  description: string;
+  href: string;
+  image?: typeof instalacionesImage;
+  imageAlt?: string;
+  icon?: string;
+}[] = [
   {
     title: 'Instalaciones',
     description: 'Conoce los espacios de la Hípica de Logroño.',
     href: '/instalaciones',
-    image: heroImage,
-    imageAlt: 'Caballo y cuidadora en una pista de equitación al aire libre',
+    image: instalacionesImage,
+    imageAlt: 'Vista aérea ilustrada de las instalaciones, pistas y zonas verdes de la Hípica de Logroño',
   },
   {
-    title: 'Noticias',
-    description: 'Novedades y noticias del centro.',
-    href: '/blog',
-    icon: '✦',
+    title: 'Hípica',
+    description: 'Conoce los espacios de la Hípica de Logroño.',
+    href: '/instalaciones',
+    image: hipicaImage,
+    imageAlt: 'Jinete practicando doma clásica con un caballo en una pista exterior',
+  },
+  {
+    title: 'Actividades Deportivas',
+    description: 'Información sobre las actividades deportivas.',
+    href: '/actividades-deportivas',
+    image: actividadesImage,
+    imageAlt: 'Ilustración de tenis, pádel, kayak y paddle surf en azul y dorado',
+  },
+  {
+    title: 'Ocio y Restauración',
+    description: 'Información sobre ocio y restauración.',
+    href: '/ocio-restauracion',
+    image: ocioImage,
+    imageAlt: 'Niños jugando y familias disfrutando de la terraza de restauración de la Hípica',
+  },
+  {
+    title: 'Normativa',
+    description: 'Normativa y documentos relacionados con la Hípica.',
+    href: '/normativa',
+    image: normativaImage,
+    imageAlt: 'Lista de normas y equipo de seguridad junto a un caballo en la Hípica',
   },
   {
     title: 'Contacto',
     description: 'Consulta la información de contacto.',
     href: '/contact',
-    icon: '↗',
+    image: contactoImage,
+    imageAlt: 'Ilustración de correo electrónico y sobre con una referencia ecuestre',
   },
 ];
 ---
@@ -58,7 +104,7 @@ const cards = [
 <Layout metadata={metadata}>
   <StructuredData slot="head" schema={structuredData} />
 
-  <section class="bg-[#1e3d2e] text-white">
+  <section class="bg-[#234a68] text-white">
     <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
       <div class="max-w-2xl">
         <p class="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-[#e0b23b]">Logroño · La Rioja</p>
@@ -70,20 +116,20 @@ const cards = [
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a
-            href="/instalaciones"
-            class="inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#1e3d2e] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            href="#descubre-hipica"
+            class="inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#234a68] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Descubre la Hípica
           </a>
           <a
-            href="/contact"
-            class="inline-flex min-h-12 items-center justify-center rounded-md border-2 border-white/80 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-[#1e3d2e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            href="#noticias-novedades"
+            class="inline-flex min-h-12 items-center justify-center rounded-md border-2 border-white/80 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-[#234a68] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            Contacto
+            Novedades
           </a>
         </div>
       </div>
-      <div class="overflow-hidden rounded-xl bg-[#315d45] shadow-2xl shadow-black/20">
+      <div class="overflow-hidden rounded-xl bg-[#315f82] shadow-2xl shadow-black/20">
         <img
           src={heroImage.src}
           alt="Caballo y cuidadora en una pista de equitación al aire libre"
@@ -96,10 +142,70 @@ const cards = [
     </div>
   </section>
 
-  <section class="bg-[#f4f2e9] px-5 py-16 sm:px-8 sm:py-20 lg:py-24" aria-labelledby="discover-title">
+  <section id="noticias-novedades" class="scroll-mt-10 bg-white px-5 py-14 sm:px-8 sm:py-16" aria-labelledby="news-title">
+    <div class="mx-auto max-w-7xl">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 id="news-title" class="text-3xl font-extrabold tracking-tight text-[#234a68] sm:text-4xl">Noticias y novedades</h2>
+          <p class="mt-3 max-w-2xl text-[#52616d]">Las últimas noticias de la Hípica de Logroño.</p>
+        </div>
+        <a href="/blog" class="font-semibold text-[#234a68] underline decoration-[#234a68]/50 underline-offset-4 hover:decoration-[#234a68]">
+          Ver todas las noticias <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      {
+        latestPostsWithImages.length ? (
+          <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {latestPostsWithImages.map(({ post, image }) => (
+              <article class="flex min-h-[14rem] overflow-hidden rounded-lg bg-[#f4f2e9] shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-lg">
+                {image ? (
+                  <a href={getPermalink(post.permalink, 'post')} class="relative block w-[36%] shrink-0 self-stretch overflow-hidden">
+                    <Image
+                      src={image}
+                      alt={post.imageAlt || post.title}
+                      class="absolute inset-0 h-full w-full object-cover"
+                      layout="cover"
+                      loading="lazy"
+                    />
+                  </a>
+                ) : (
+                  <div class="flex w-[36%] shrink-0 items-center justify-center self-stretch bg-[#dce3e8] text-4xl text-[#234a68]/60" aria-hidden="true">
+                    ✦
+                  </div>
+                )}
+                <div class="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
+                  <time datetime={post.publishDate.toISOString()} class="text-xs font-medium text-[#647381]">
+                    {getFormattedDate(post.publishDate)}
+                  </time>
+                  <h3 class="mt-2 text-lg font-bold leading-tight text-[#234a68]">
+                    <a href={getPermalink(post.permalink, 'post')} class="hover:underline">
+                      {post.title}
+                    </a>
+                  </h3>
+                  {post.excerpt && <p class="mt-2 line-clamp-4 text-sm leading-relaxed text-[#52616d]">{post.excerpt}</p>}
+                  <a
+                    href={getPermalink(post.permalink, 'post')}
+                    class="mt-auto inline-flex pt-4 text-sm font-semibold text-[#234a68] underline decoration-[#234a68]/50 underline-offset-4 hover:decoration-[#234a68]"
+                  >
+                    Leer noticia <span class="ml-1" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="mt-8 rounded-lg bg-[#f4f2e9] p-6 text-[#52616d]">
+            Todavía no hay noticias publicadas.
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section id="descubre-hipica" class="bg-[#f4f2e9] px-5 py-16 sm:px-8 sm:py-20 lg:py-24" aria-labelledby="discover-title">
     <div class="mx-auto max-w-7xl">
       <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Hípica de Logroño</p>
-      <h2 id="discover-title" class="mb-9 text-3xl font-extrabold tracking-tight text-[#1e3d2e] sm:text-4xl">
+      <h2 id="discover-title" class="mb-9 text-3xl font-extrabold tracking-tight text-[#234a68] sm:text-4xl">
         Descubre la Hípica
       </h2>
       <div class="grid gap-6 md:grid-cols-3">
@@ -108,32 +214,20 @@ const cards = [
             {card.image ? (
               <img src={card.image.src} alt={card.imageAlt} class="h-48 w-full object-cover" width={card.image.width} height={card.image.height} loading="lazy" />
             ) : (
-              <div class="flex h-48 items-center justify-center bg-[#dcd8c8] text-4xl font-light text-[#1e3d2e]/65" aria-hidden="true">
+              <div class="flex h-48 items-center justify-center bg-[#dce3e8] text-4xl font-light text-[#234a68]/65" aria-hidden="true">
                 {card.icon}
               </div>
             )}
             <div class="p-6">
-              <h3 class="text-2xl font-bold tracking-tight text-[#1e3d2e]">{card.title}</h3>
-              <p class="mt-2 min-h-12 leading-relaxed text-[#536158]">{card.description}</p>
-              <a href={card.href} class="mt-4 inline-flex font-semibold text-[#1e3d2e] underline decoration-[#1e3d2e]/50 underline-offset-4 hover:decoration-[#1e3d2e]">
+              <h3 class="text-2xl font-bold tracking-tight text-[#234a68]">{card.title}</h3>
+              <p class="mt-2 min-h-12 leading-relaxed text-[#52616d]">{card.description}</p>
+              <a href={card.href} class="mt-4 inline-flex font-semibold text-[#234a68] underline decoration-[#234a68]/50 underline-offset-4 hover:decoration-[#234a68]">
                 Ver más <span class="ml-1" aria-hidden="true">→</span>
               </a>
             </div>
           </article>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="bg-white px-5 py-14 sm:px-8 sm:py-16" aria-labelledby="news-title">
-    <div class="mx-auto flex max-w-7xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h2 id="news-title" class="text-3xl font-extrabold tracking-tight text-[#1e3d2e] sm:text-4xl">Noticias y novedades</h2>
-        <p class="mt-3 max-w-2xl text-[#536158]">Consulta las noticias y novedades de la Hípica de Logroño.</p>
-      </div>
-      <a href="/blog" class="font-semibold text-[#1e3d2e] underline decoration-[#1e3d2e]/50 underline-offset-4 hover:decoration-[#1e3d2e]">
-        Ver todas las noticias <span aria-hidden="true">→</span>
-      </a>
     </div>
   </section>
 </Layout>

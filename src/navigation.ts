@@ -2,9 +2,12 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
 export const headerData = {
   links: [
-    { text: 'Inicio', href: getPermalink('/') },
     { text: 'Instalaciones', href: getPermalink('/instalaciones') },
-    { text: 'Noticias', href: getBlogPermalink() },
+    { text: 'Novedades', href: getBlogPermalink() },
+    { text: 'Hípica', href: getPermalink('/instalaciones') },
+    { text: 'Actividades Deportivas', href: getPermalink('/actividades-deportivas') },
+    { text: 'Ocio y Restauración', href: getPermalink('/ocio-restauracion') },
+    { text: 'Normativa', href: getPermalink('/normativa') },
     { text: 'Contacto', href: getPermalink('/contact') },
   ],
   actions: [],
