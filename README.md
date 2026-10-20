@@ -1,6 +1,6 @@
 # Hípica de Logroño
 
-Sitio web de la Hípica de Logroño para presentar sus instalaciones, compartir noticias y facilitar el contacto con el centro. Está desarrollado con Astro y utiliza Decap CMS para gestionar las noticias.
+Sitio web de la Hípica de Logroño para presentar sus instalaciones, compartir noticias y facilitar el contacto con el centro. Está desarrollado con Astro y utiliza Sveltia CMS para gestionar las noticias.
 
 ## Desarrollo local
 
@@ -27,4 +27,6 @@ npm run build
 
 ## CMS
 
-El panel de Decap CMS se publica en `/decapcms/`. Las noticias se guardan como archivos Markdown en `src/data/post/` y las imágenes en `src/assets/images/`. El acceso al CMS requiere configurar Netlify Identity y Git Gateway para el sitio desplegado.
+El panel de Sveltia CMS se publica en `/admin/`. Las noticias se guardan como archivos Markdown en `src/data/post/`. Las imágenes existentes se encuentran en `src/assets/images/`; las que se suban desde el CMS se guardarán en `public/uploads/noticias/`.
+
+El CMS usa GitHub con el repositorio `hipica-log/web-hipica` y la rama `main`. Para iniciar sesión, abre `/admin/` en el sitio publicado y utiliza **Sign in with Token** para crear e introducir un token personal de GitHub con permisos de escritura en el repositorio. El token queda en el navegador y no se guarda en los archivos del proyecto.

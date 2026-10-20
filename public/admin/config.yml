@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: hipica-log/web-hipica
+  branch: main
+  auth_methods: [token]
+
+media_folder: public/uploads/noticias
+public_folder: /uploads/noticias
+
+output:
+  omit_empty_optional_fields: true
+
+collections:
+  - name: post
+    label: Noticias
+    label_singular: Noticia
+    folder: src/data/post
+    create: true
+    extension: md
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Resumen, name: excerpt, widget: string, required: false }
+      - { label: Categoría, name: category, widget: string, required: false }
+      - {
+          label: Etiquetas,
+          name: tags,
+          widget: list,
+          required: false,
+          field: { label: Etiqueta, name: tag, widget: string },
+        }
+      - { label: Imagen, name: image, widget: image, required: false }
+      - { label: Texto alternativo de la imagen, name: imageAlt, widget: string, required: false }
+      - { label: Fecha de publicación, name: publishDate, widget: datetime, required: false }
+      - { label: Autor, name: author, widget: string, required: false }
+      - { label: Contenido, name: body, widget: markdown }
