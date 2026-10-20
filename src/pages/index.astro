@@ -3,7 +3,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import { SITE, I18N } from 'astrowind:config';
 import favIconSvg from '~/assets/favicons/favicon.svg';
-import heroImage from '~/assets/images/hero-hipica.webp';
 import instalacionesImage from '~/assets/images/instalaciones-ilustracion.png';
 import hipicaImage from '~/assets/images/hipica-deporte.png';
 import actividadesImage from '~/assets/images/actividades-deportivas.png';
@@ -105,39 +104,29 @@ const cards: {
   <StructuredData slot="head" schema={structuredData} />
 
   <section class="bg-[#234a68] text-white">
-    <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
-      <div class="max-w-2xl">
+    <div class="mx-auto max-w-7xl px-5 py-10 text-center sm:px-8 sm:py-14 lg:py-16">
+      <div class="mx-auto max-w-3xl">
         <p class="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-[#e0b23b]">Logroño · La Rioja</p>
         <h1 class="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-          Deporte, naturaleza y ocio en un mismo lugar
+          Hípica de Logroño
         </h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
+        <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
           Te damos la bienvenida a la Hípica de Logroño. Descubre el centro, sus instalaciones y su actividad ecuestre.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="#descubre-hipica"
-            class="inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#234a68] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            Descubre la Hípica
-          </a>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
           <a
             href="#noticias-novedades"
             class="inline-flex min-h-12 items-center justify-center rounded-md border-2 border-white/80 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-[#234a68] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Novedades
           </a>
+          <a
+            href="#descubre-hipica"
+            class="inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#234a68] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Descubre la Hípica
+          </a>
         </div>
-      </div>
-      <div class="overflow-hidden rounded-xl bg-[#315f82] shadow-2xl shadow-black/20">
-        <img
-          src={heroImage.src}
-          alt="Caballo y cuidadora en una pista de equitación al aire libre"
-          class="aspect-[4/3] h-full w-full object-cover"
-          width={heroImage.width}
-          height={heroImage.height}
-          fetchpriority="high"
-        />
       </div>
     </div>
   </section>
