@@ -2,8 +2,8 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
 export const headerData = {
   links: [
-    { text: 'Instalaciones', href: getPermalink('/instalaciones') },
     { text: 'Novedades', href: getBlogPermalink() },
+    { text: 'Instalaciones', href: getPermalink('/instalaciones') },
     { text: 'Hípica', href: getPermalink('/hipica') },
     { text: 'Actividades Deportivas', href: getPermalink('/actividades-deportivas') },
     { text: 'Ocio y Restauración', href: getPermalink('/ocio-restauracion') },
