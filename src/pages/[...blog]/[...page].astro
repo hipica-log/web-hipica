@@ -3,7 +3,6 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
 import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
 import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
@@ -22,14 +21,14 @@ const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
 const breadcrumbs = [
-  { text: 'Home', href: getPermalink('/') },
+  { text: 'Inicio', href: getPermalink('/') },
   ...(currentPage > 1
-    ? [{ text: 'Noticias', href: getBlogPermalink() }, { text: `Página ${currentPage}` }]
-    : [{ text: 'Noticias' }]),
+    ? [{ text: 'Novedades', href: getBlogPermalink() }, { text: `Página ${currentPage}` }]
+    : [{ text: 'Novedades' }]),
 ];
 
 const metadata = {
-  title: `Noticias${currentPage > 1 ? ` — Página ${currentPage}` : ''}`,
+  title: `Novedades${currentPage > 1 ? ` — Página ${currentPage}` : ''}`,
   description: 'Noticias y novedades de la Hípica de Logroño.',
   robots: {
     index: blogListRobots?.index && currentPage === 1,
@@ -47,9 +46,29 @@ const metadata = {
     {page.url.next && <link rel="next" href={page.url.next} />}
   </Fragment>
   <Breadcrumbs bar items={breadcrumbs} />
-  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline subtitle="Noticias y novedades de la Hípica de Logroño.">Noticias</Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  <section class="bg-[#f4f2e9] px-5 py-12 sm:px-8 sm:py-16" aria-labelledby="news-title">
+    <div class="mx-auto max-w-7xl">
+      <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Hípica de Logroño</p>
+      <h1 id="news-title" class="text-4xl font-extrabold tracking-tight text-[#234a68] sm:text-5xl">Novedades</h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-[#52616d]">
+        Noticias, actividades y actualidad de la Hípica de Logroño.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white px-5 py-12 sm:px-8 sm:py-16" aria-label="Noticias y novedades">
+    <div class="mx-auto max-w-7xl">
+      {page.data.length ? (
+        <BlogList posts={page.data} />
+      ) : (
+        <p class="rounded-lg bg-[#f4f2e9] p-6 text-[#52616d]">Todavía no hay novedades publicadas.</p>
+      )}
+      <Pagination
+        prevUrl={page.url.prev}
+        nextUrl={page.url.next}
+        prevText="Novedades más recientes"
+        nextText="Novedades anteriores"
+      />
+    </div>
   </section>
 </Layout>

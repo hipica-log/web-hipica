@@ -23,7 +23,7 @@ const currentPage = page.currentPage ?? 1;
 
 const breadcrumbs = [
   { text: 'Home', href: getPermalink('/') },
-  { text: 'Blog', href: getBlogPermalink() },
+  { text: 'Novedades', href: getBlogPermalink() },
   ...(currentPage > 1
     ? [{ text: category.title, href: getPermalink(category.slug, 'category') }, { text: `Page ${currentPage}` }]
     : [{ text: category.title }]),

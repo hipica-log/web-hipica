@@ -1,12 +1,8 @@
 ---
 import type { ImageMetadata } from 'astro';
-import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
-import PostTags from '~/components/blog/Tags.astro';
-
 import { APP_BLOG } from 'astrowind:config';
 import type { Post } from '~/types';
-
 import { getPermalink } from '~/utils/permalinks';
 import { findImage } from '~/utils/images';
 import { getFormattedDate } from '~/utils/utils';
@@ -17,104 +13,49 @@ export interface Props {
 
 const { post } = Astro.props;
 const image = (await findImage(post.image)) as ImageMetadata | undefined;
-
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
 ---
 
-<article
-  class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${image ? 'md:grid-cols-2' : ''}`}
->
+<article class="flex min-h-56 overflow-hidden rounded-lg bg-[#f4f2e9] shadow-sm ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-md">
   {
-    image &&
-      (link ? (
-        <a class="mb-6 flex max-h-[32rem] w-full justify-center overflow-hidden rounded shadow-lg md:mb-0" href={link}>
-          <Image
-            src={image}
-            width={image.width}
-            height={image.height}
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 100vw, 50vw"
-            alt={post.imageAlt || post.title}
-            class="max-h-[32rem] max-w-full object-contain"
-            layout="none"
-            format="webp"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
-      ) : (
-        <div class="mb-6 flex max-h-[32rem] w-full justify-center overflow-hidden rounded shadow-lg md:mb-0">
-          <Image
-            src={image}
-            width={image.width}
-            height={image.height}
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 100vw, 50vw"
-            alt={post.imageAlt || post.title}
-            class="max-h-[32rem] max-w-full object-contain"
-            layout="none"
-            format="webp"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      ))
-  }
-  <div class="mt-2">
-    <header>
-      <div class="mb-1">
-        <span class="text-sm">
-          <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={post.publishDate.toISOString()} class="inline-block"
-            >{getFormattedDate(post.publishDate)}</time
-          >
-          {
-            post.author && (
-              <>
-                {' '}
-                · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-                <span>{post.author.replaceAll('-', ' ')}</span>
-              </>
-            )
-          }
-          {
-            post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
-              </>
-            )
-          }
-        </span>
+    image ? (
+      <a href={link || undefined} class="relative block w-[36%] shrink-0 self-stretch overflow-hidden" aria-label={`Leer ${post.title}`}>
+        <Image
+          src={image}
+          alt={post.imageAlt || post.title}
+          class="absolute inset-0 h-full w-full object-cover"
+          layout="cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    ) : (
+      <div class="flex w-[36%] shrink-0 items-center justify-center self-stretch bg-[#dce3e8] text-4xl text-[#234a68]/60" aria-hidden="true">
+        ✦
       </div>
-      <h2 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300">
-        {
-          link ? (
-            <a
-              class="inline-block hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
-              href={link}
-            >
-              {post.title}
-            </a>
-          ) : (
-            post.title
-          )
-        }
-      </h2>
-    </header>
-
-    {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
-    {
-      post.tags && Array.isArray(post.tags) ? (
-        <footer class="mt-5">
-          <PostTags tags={post.tags} />
-        </footer>
-      ) : (
-        <Fragment />
-      )
-    }
+    )
+  }
+  <div class="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
+    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-[#647381]">
+      <time datetime={post.publishDate.toISOString()}>{getFormattedDate(post.publishDate)}</time>
+      {post.category && (
+        <>
+          <span aria-hidden="true">·</span>
+          <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>{post.category.title}</a>
+        </>
+      )}
+    </div>
+    <h2 class="mt-2 text-lg font-bold leading-tight text-[#234a68]">
+      {link ? <a class="hover:underline" href={link}>{post.title}</a> : post.title}
+    </h2>
+    {post.excerpt && <p class="mt-2 line-clamp-4 text-sm leading-relaxed text-[#52616d]">{post.excerpt}</p>}
+    {link && (
+      <a
+        href={link}
+        class="mt-auto inline-flex items-center pt-4 text-sm font-semibold text-[#234a68] underline decoration-[#234a68]/50 underline-offset-4 hover:decoration-[#234a68]"
+      >
+        Leer noticia <span class="ml-1" aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 </article>
