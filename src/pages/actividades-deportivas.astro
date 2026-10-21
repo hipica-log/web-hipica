@@ -1,0 +1,79 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import activitiesImage from '~/assets/images/actividades-deportivas.png';
+
+const metadata = {
+  title: 'Actividades deportivas',
+  description: 'Descubre las actividades de Tenis, Pádel, Kayak y Paddle Surf de la Hípica de Logroño.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="bg-[#f4f2e9] px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Hípica de Logroño</p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-[#234a68] sm:text-5xl">Actividades deportivas</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[#52616d]">
+          Disfruta del deporte en nuestras instalaciones con las clases de Tenis y Pádel, y las actividades de Kayak y Paddle Surf.
+        </p>
+      </div>
+      <img
+        src={activitiesImage.src}
+        alt="Ilustración de tenis, pádel, kayak y paddle surf en azul y dorado"
+        class="w-full rounded-xl shadow-lg"
+        width={activitiesImage.width}
+        height={activitiesImage.height}
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="bg-white px-5 py-14 sm:px-8 sm:py-20" aria-label="Actividades deportivas disponibles">
+    <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
+      <article class="activity-card rounded-xl bg-[#f4f2e9]">
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-[#a77b17]">Deportes de raqueta</p>
+        <h2 class="text-2xl font-extrabold text-[#234a68] sm:text-3xl">Tenis y Pádel</h2>
+        <p class="mt-4 leading-relaxed text-[#52616d]">
+          Las clases de Tenis y Pádel están dirigidas por Jesús Murugarren, «Chuchi».
+          Para consultar información y ponerte en contacto, puedes llamarle o escribirle por correo electrónico.
+        </p>
+        <div class="mt-6 flex flex-col items-start gap-3 text-[#234a68]">
+          <a class="font-semibold underline underline-offset-4 hover:text-[#9a7010]" href="tel:+34696519311">
+            Teléfono: 696 519 311
+          </a>
+          <a class="font-semibold underline underline-offset-4 hover:text-[#9a7010]" href="mailto:jmurugarren@hotmail.com">
+            jmurugarren@hotmail.com
+          </a>
+        </div>
+      </article>
+
+      <article class="activity-card rounded-xl bg-[#234a68] text-white">
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-[#e0b23b]">Deporte en el agua</p>
+        <h2 class="text-2xl font-extrabold sm:text-3xl">Kayak y Paddle Surf</h2>
+        <p class="mt-4 leading-relaxed text-white/80">
+          También ofrecemos Kayak y Paddle Surf para disfrutar de actividades acuáticas y del entorno natural.
+          Contacta con el centro para consultar disponibilidad e información.
+        </p>
+        <a
+          href="/contact"
+          class="mt-6 inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#234a68] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          Contactar con el centro
+        </a>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .activity-card {
+    padding: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .activity-card {
+      padding: 2.25rem;
+    }
+  }
+</style>
