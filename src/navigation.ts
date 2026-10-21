@@ -8,7 +8,7 @@ export const headerData = {
     { text: 'Actividades Deportivas', href: getPermalink('/actividades-deportivas') },
     { text: 'Ocio y Restauración', href: getPermalink('/ocio-restauracion') },
     { text: 'Normativa', href: getPermalink('/normativa') },
-    { text: 'Contacto', href: getPermalink('/contact') },
+    { text: 'Contacto', href: getPermalink('/contacto') },
   ],
   actions: [],
 };
@@ -34,7 +34,7 @@ export const footerData = {
     {
       title: 'Contacto',
       links: [
-        { text: 'Cómo llegar y horarios', href: getPermalink('/contact') },
+        { text: 'Cómo llegar y horarios', href: getPermalink('/contacto') },
       ],
     },
   ],

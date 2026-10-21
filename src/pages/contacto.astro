@@ -1,0 +1,205 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import contactImage from '~/assets/images/contacto-hipica.png';
+
+const metadata = {
+  title: 'Contacto',
+  description: 'Contacta con la Hípica de Logroño: teléfono, correo electrónico, horarios y formulario de consulta.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="bg-[#f4f2e9] px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Hípica de Logroño</p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-[#234a68] sm:text-5xl">Contacto</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[#52616d]">
+          ¿Tienes alguna consulta sobre la Hípica, las actividades deportivas o las instalaciones? Escríbenos o llámanos.
+        </p>
+      </div>
+      <img
+        src={contactImage.src}
+        alt="Ilustración de contacto electrónico de la Hípica de Logroño"
+        class="w-full rounded-xl shadow-lg"
+        width={contactImage.width}
+        height={contactImage.height}
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="bg-white px-5 py-14 sm:px-8 sm:py-20" aria-label="Datos de contacto y formulario">
+    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+      <aside class="contact-details rounded-xl bg-[#234a68] text-white">
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-[#e0b23b]">Estamos aquí para ayudarte</p>
+        <h2 class="text-2xl font-extrabold sm:text-3xl">Datos de contacto</h2>
+        <div class="mt-7 space-y-6">
+          <div>
+            <h3 class="font-bold text-white">Teléfono y WhatsApp</h3>
+            <a class="mt-1 inline-block text-white/85 underline underline-offset-4 hover:text-white" href="tel:+34635699178">
+              635 699 178
+            </a>
+            <a class="mt-1 block text-white/85 underline underline-offset-4 hover:text-white" href="https://wa.me/34635699178">
+              Escribir por WhatsApp
+            </a>
+          </div>
+          <div>
+            <h3 class="font-bold text-white">Correo electrónico</h3>
+            <a
+              class="mt-1 inline-block break-all text-white/85 underline underline-offset-4 hover:text-white"
+              href="mailto:serviciosecuestresrioja@gmail.com"
+            >serviciosecuestresrioja@gmail.com</a>
+          </div>
+          <div>
+            <h3 class="font-bold text-white">Dirección</h3>
+            <address class="mt-1 not-italic leading-relaxed text-white/85">Avenida de La Playa, 4<br />26006 Logroño, La Rioja</address>
+          </div>
+          <div>
+            <h3 class="font-bold text-white">Horario de atención</h3>
+            <p class="mt-1 leading-relaxed text-white/85">Lunes a viernes: 10:00–14:00 y 17:00–20:00</p>
+            <p class="leading-relaxed text-white/85">Sábados: 10:00–14:00</p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="contact-form-card rounded-xl bg-[#f4f2e9]">
+        <h2 class="text-2xl font-extrabold text-[#234a68] sm:text-3xl">Envíanos una consulta</h2>
+        <p class="mt-3 leading-relaxed text-[#52616d]">
+          Completa el formulario y se abrirá tu aplicación de correo con el mensaje preparado para que puedas revisarlo y enviarlo.
+        </p>
+
+        <form id="contact-form" class="mt-7 grid gap-5">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-[#234a68]" for="name">Nombre</label>
+              <input
+                class="contact-input"
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Tu nombre"
+                required
+              />
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-[#234a68]" for="email">Correo electrónico</label>
+              <input
+                class="contact-input"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="nombre@ejemplo.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-[#234a68]" for="phone">Teléfono <span class="font-normal text-[#52616d]">(opcional)</span></label>
+              <input
+                class="contact-input"
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Tu teléfono"
+              />
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-[#234a68]" for="topic">Asunto</label>
+              <select class="contact-input" id="topic" name="topic" required>
+                <option value="">Selecciona un tema</option>
+                <option>Información general</option>
+                <option>Hípica</option>
+                <option>Actividades deportivas</option>
+                <option>Ocio y restauración</option>
+                <option>Instalaciones</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-[#234a68]" for="message">Mensaje</label>
+            <textarea
+              class="contact-input min-h-36 resize-y"
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="¿En qué podemos ayudarte?"
+              required
+            ></textarea>
+          </div>
+
+          <p class="text-sm leading-relaxed text-[#52616d]">
+            Al continuar, se abrirá tu aplicación de correo. Los datos no se envían ni se almacenan en esta web.
+            Puedes consultar la <a class="font-semibold text-[#234a68] underline underline-offset-2" href="/privacy">política de privacidad</a>.
+          </p>
+          <button
+            class="inline-flex min-h-12 w-fit items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#234a68] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#234a68]"
+            type="submit"
+          >Continuar en mi correo</button>
+          <p id="contact-form-status" class="text-sm text-[#234a68]" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+  const status = document.querySelector<HTMLParagraphElement>('#contact-form-status');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const formData = new FormData(form);
+    const subject = `Consulta desde la web: ${formData.get('topic')}`;
+    const body = [
+      `Nombre: ${formData.get('name')}`,
+      `Correo: ${formData.get('email')}`,
+      `Teléfono: ${formData.get('phone') || 'No indicado'}`,
+      `Asunto: ${formData.get('topic')}`,
+      '',
+      'Mensaje:',
+      formData.get('message'),
+    ].join('\n');
+
+    if (status) status.textContent = 'Abriendo tu aplicación de correo…';
+    window.location.href = `mailto:serviciosecuestresrioja@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+<style>
+  .contact-details,
+  .contact-form-card {
+    padding: 1.75rem;
+  }
+
+  .contact-input {
+    width: 100%;
+    border: 1px solid rgb(35 74 104 / 24%);
+    border-radius: 0.5rem;
+    background: white;
+    padding: 0.75rem 0.875rem;
+    color: #283540;
+  }
+
+  .contact-input:focus {
+    outline: 2px solid #234a68;
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 640px) {
+    .contact-details,
+    .contact-form-card {
+      padding: 2.25rem;
+    }
+  }
+</style>

@@ -47,7 +47,7 @@ const {
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
 // Compare paths without trailing slashes so the active link is detected
-// regardless of the `trailingSlash` setting (`getPermalink()` emits `/contact/`
+// regardless of the `trailingSlash` setting (`getPermalink()` emits `/contacto/`
 // when it is enabled, while `currentPath` above never has one, see #557).
 const isActive = (href?: string) => typeof href === 'string' && `/${trimSlash(href)}` === currentPath;
 
