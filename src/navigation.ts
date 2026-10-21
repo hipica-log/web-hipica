@@ -4,7 +4,7 @@ export const headerData = {
   links: [
     { text: 'Instalaciones', href: getPermalink('/instalaciones') },
     { text: 'Novedades', href: getBlogPermalink() },
-    { text: 'Hípica', href: getPermalink('/instalaciones') },
+    { text: 'Hípica', href: getPermalink('/hipica') },
     { text: 'Actividades Deportivas', href: getPermalink('/actividades-deportivas') },
     { text: 'Ocio y Restauración', href: getPermalink('/ocio-restauracion') },
     { text: 'Normativa', href: getPermalink('/normativa') },
@@ -19,7 +19,7 @@ export const footerData = {
       title: 'La Hípica',
       links: [
         { text: 'Instalaciones', href: getPermalink('/instalaciones') },
-        { text: 'Hípica', href: getPermalink('/instalaciones') },
+        { text: 'Hípica', href: getPermalink('/hipica') },
         { text: 'Novedades', href: getBlogPermalink() },
       ],
     },
