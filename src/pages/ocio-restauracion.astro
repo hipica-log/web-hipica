@@ -1,0 +1,70 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ocioImage from '~/assets/images/ocio-restauracion.png';
+
+const metadata = {
+  title: 'Ocio y Restauración',
+  description: 'Planes de ocio para niños y familias y novedades de restauración en la Hípica de Logroño.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="bg-[#f4f2e9] px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Hípica de Logroño</p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-[#234a68] sm:text-5xl">Ocio y Restauración</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[#52616d]">
+          Un espacio para disfrutar del tiempo libre en familia. Aquí encontrarás información sobre las propuestas de ocio
+          para niños y las novedades de restauración del centro.
+        </p>
+      </div>
+      <img
+        src={ocioImage.src}
+        alt="Niños jugando y familias disfrutando de la terraza de restauración de la Hípica"
+        class="w-full rounded-xl shadow-lg"
+        width={ocioImage.width}
+        height={ocioImage.height}
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="bg-white px-5 py-14 sm:px-8 sm:py-20" aria-label="Ocio y restauración en el centro">
+    <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
+      <article class="content-card rounded-xl bg-[#f4f2e9]">
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-[#a77b17]">Para disfrutar en familia</p>
+        <h2 class="text-2xl font-extrabold text-[#234a68] sm:text-3xl">Ocio para niños y niñas</h2>
+        <p class="mt-4 leading-relaxed text-[#52616d]">
+          El centro ofrece un entorno para compartir tiempo libre y disfrutar de actividades de ocio dirigidas a los más pequeños.
+          Consulta las novedades para conocer las próximas propuestas.
+        </p>
+        <a
+          href="/blog"
+          class="mt-6 inline-flex font-semibold text-[#234a68] underline underline-offset-4 hover:text-[#9a7010]"
+        >Ver novedades</a>
+      </article>
+
+      <article class="content-card rounded-xl bg-[#234a68] text-white">
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-[#e0b23b]">Un momento para compartir</p>
+        <h2 class="text-2xl font-extrabold sm:text-3xl">Restauración</h2>
+        <p class="mt-4 leading-relaxed text-white/80">
+          Descubre las noticias y propuestas relacionadas con la restauración de la Hípica. Publicaremos aquí la información
+          cuando esté disponible.
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .content-card {
+    padding: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .content-card {
+      padding: 2.25rem;
+    }
+  }
+</style>
