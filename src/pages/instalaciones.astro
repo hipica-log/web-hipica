@@ -88,7 +88,10 @@ const facilities = [
 
 <script>
   import * as maplibregl from 'maplibre-gl';
+  import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
   import { LogoControl } from '@maptoolkit/maplibre-logo-control';
+
+  maplibregl.setWorkerUrl(workerUrl);
 
   const mapElement = document.querySelector<HTMLDivElement>('#facilities-map');
 
