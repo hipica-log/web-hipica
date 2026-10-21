@@ -1,36 +1,114 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+import facilitiesImage from '~/assets/images/instalaciones.jpg';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import '@maptoolkit/maplibre-logo-control/style.css';
 
 const metadata = {
   title: 'Instalaciones',
-  description: 'Conoce las instalaciones de la Hípica de Logroño.',
+  description: 'Descubre las instalaciones ecuestres, deportivas y de ocio de la Hípica de Logroño.',
 };
+
+const facilities = [
+  {
+    title: 'Zona ecuestre',
+    description: 'Espacios destinados a la práctica de la hípica y al cuidado de los caballos, con zonas cubiertas y pistas de trabajo.',
+    icon: '🐎',
+  },
+  {
+    title: 'Tenis y pádel',
+    description: 'Pistas para disfrutar de deportes de raqueta, con opciones al aire libre y espacios cubiertos.',
+    icon: '🎾',
+  },
+  {
+    title: 'Deporte y piscinas',
+    description: 'El centro reúne espacios para distintas actividades deportivas, además de piscinas y zonas verdes.',
+    icon: '🏊',
+  },
+  {
+    title: 'Ocio y restauración',
+    description: 'Áreas de encuentro y descanso para disfrutar del centro en familia, con servicio de bar y cafetería.',
+    icon: '☀️',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <Hero
-    tagline="Instalaciones"
-  >
-    <Fragment slot="title">Nuestras instalaciones</Fragment>
-    <Fragment slot="subtitle">[Una o dos frases de presentación]</Fragment>
-  </Hero>
+  <section class="bg-[#f4f2e9] px-5 py-12 sm:px-8 sm:py-16" aria-labelledby="facilities-title">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12">
+        <div>
+          <h2 id="facilities-title" class="text-3xl font-extrabold tracking-tight text-[#234a68] sm:text-4xl">Nuestras instalaciones</h2>
+          <p class="mt-4 max-w-2xl leading-relaxed text-[#52616d]">
+            La Hípica de Logroño cuenta con espacios ecuestres, deportivos y de ocio en un entorno amplio y ajardinado. Estas son algunas de las áreas que encontrarás en el centro:
+          </p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-2">
+            {facilities.map((facility) => (
+              <article class="rounded-lg bg-white p-5 shadow-sm ring-1 ring-black/5">
+                <span class="text-2xl" aria-hidden="true">{facility.icon}</span>
+                <h3 class="mt-3 text-xl font-bold text-[#234a68]">{facility.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-[#52616d]">{facility.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <Image
+          src={facilitiesImage}
+          alt="Vista aérea de las instalaciones de la Hípica de Logroño, con pistas, zonas verdes y piscinas"
+          class="w-full rounded-xl shadow-lg"
+          layout="none"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
 
-  <Features2
-    title="Qué encontrarás"
-    items={[
-      { title: '[Pista 1]', description: '[Descripción breve]', icon: 'tabler:building' },
-      { title: '[Cuadras]', description: '[Descripción breve]', icon: 'tabler:building' },
-      { title: '[Otros servicios]', description: '[Descripción breve]', icon: 'tabler:building' },
-    ]}
-  />
+  <section class="bg-white px-5 py-12 sm:px-8 sm:py-16" aria-labelledby="location-title">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="mb-2 text-sm font-bold uppercase tracking-[0.16em] text-[#a77b17]">Cómo llegar</p>
+          <h2 id="location-title" class="text-3xl font-extrabold tracking-tight text-[#234a68] sm:text-4xl">Encuéntranos</h2>
+          <p class="mt-3 text-[#52616d]">Avenida de La Playa, 4 · 26006 Logroño, La Rioja</p>
+        </div>
+      </div>
 
-  <CallToAction
-    actions={[{ variant: 'primary', text: 'Contactar', href: '/contact' }]}
-  >
-    <Fragment slot="title">¿Quieres visitarnos?</Fragment>
-    <Fragment slot="subtitle">Consulta horarios y cómo llegar.</Fragment>
-  </CallToAction>
+      <div
+        id="facilities-map"
+        class="h-[360px] overflow-hidden rounded-xl bg-[#dce3e8] shadow-sm ring-1 ring-black/10 sm:h-[440px]"
+        role="application"
+        aria-label="Mapa interactivo de la ubicación de la Hípica de Logroño"
+      ></div>
+    </div>
+  </section>
+
 </Layout>
+
+<script>
+  import * as maplibregl from 'maplibre-gl';
+  import { LogoControl } from '@maptoolkit/maplibre-logo-control';
+
+  const mapElement = document.querySelector<HTMLDivElement>('#facilities-map');
+
+  if (mapElement) {
+    const location: [number, number] = [-2.45531, 42.47263];
+    const map = new maplibregl.Map({
+      container: mapElement,
+      style: 'https://styles.maptoolkit.org/summer.json',
+      center: location,
+      zoom: 15,
+      maxZoom: 19,
+      scrollZoom: true,
+      attributionControl: { customAttribution: '', compact: false },
+    });
+
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(new LogoControl());
+    new maplibregl.Marker({ color: '#234a68' })
+      .setLngLat(location)
+      .setPopup(new maplibregl.Popup({ offset: 25 }).setHTML('<strong>Hípica de Logroño</strong><br>Avenida de La Playa, 4'))
+      .addTo(map);
+  }
+</script>

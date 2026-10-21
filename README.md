@@ -25,6 +25,10 @@ Para generar el sitio estático:
 npm run build
 ```
 
+## Mapa de instalaciones
+
+El mapa usa MapLibre GL JS y los estilos vectoriales comunitarios de Maptoolkit, basados en OpenStreetMap. No requiere cuenta ni token. La atribución visible de Maptoolkit y OpenStreetMap se incluye en el mapa.
+
 ## CMS
 
 El panel de Sveltia CMS se publica en `/admin/`. Las noticias se guardan como archivos Markdown en `src/data/post/`. Las imágenes existentes se encuentran en `src/assets/images/`; las que se suban desde el CMS se guardarán en `public/uploads/noticias/`.
