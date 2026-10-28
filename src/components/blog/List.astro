@@ -9,12 +9,15 @@ export interface Props {
 const { posts } = Astro.props;
 ---
 
-<ul class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+<ul class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-expiry-list>
   {
     posts.map((post) => (
-      <li class="min-w-0">
+      <li class="min-w-0" data-expiration-date={post.expirationDate?.toISOString().slice(0, 10)}>
         <Item post={post} />
       </li>
     ))
   }
 </ul>
+<p class="hidden rounded-lg bg-[#f4f2e9] p-6 text-[#52616d]" data-expiry-empty>
+  No hay novedades vigentes en este momento.
+</p>

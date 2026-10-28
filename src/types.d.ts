@@ -12,6 +12,7 @@ export interface Post {
 
   publishDate: Date;
   updateDate?: Date;
+  expirationDate?: Date;
 
   title: string;
   /** Optional summary of post content. */

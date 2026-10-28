@@ -8,6 +8,7 @@ tags:
 image: '~/assets/images/pincho-pote.jpg'
 imageAlt: 'Pincho pote en la Hípica'
 publishDate: 2026-10-16T11:00:00.000Z
+expirationDate: 2026-10-18T11:00:00.000Z
 author: 'Hípica de Logroño'
 ---
 

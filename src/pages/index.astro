@@ -11,11 +11,11 @@ import normativaImage from '~/assets/images/normativa-hipica.png';
 import contactoImage from '~/assets/images/contacto-hipica.png';
 import Image from '~/components/common/Image.astro';
 import { findImage } from '~/utils/images';
-import { findLatestPosts } from '~/utils/blog';
+import { fetchPosts } from '~/utils/blog';
 import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
 
-const latestPosts = await findLatestPosts({ count: 3 });
+const latestPosts = await fetchPosts();
 const latestPostsWithImages = await Promise.all(
   latestPosts.map(async (post) => ({ post, image: await findImage(post.image) }))
 );
@@ -160,7 +160,11 @@ const cards: {
         latestPostsWithImages.length ? (
           <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {latestPostsWithImages.map(({ post, image }) => (
-              <article class="flex min-h-[14rem] overflow-hidden rounded-lg bg-[#f4f2e9] shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-lg">
+              <article
+                data-home-news-card
+                data-expiration-date={post.expirationDate?.toISOString().slice(0, 10)}
+                class="flex min-h-[14rem] overflow-hidden rounded-lg bg-[#f4f2e9] shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-lg"
+              >
                 {image ? (
                   <a href={getPermalink(post.permalink, 'post')} class="relative block w-[36%] shrink-0 self-stretch overflow-hidden">
                     <Image
@@ -196,6 +200,9 @@ const cards: {
               </article>
             ))}
           </div>
+          <p class="mt-8 hidden rounded-lg bg-[#f4f2e9] p-6 text-[#52616d]" data-home-news-empty>
+            No hay novedades vigentes en este momento.
+          </p>
         ) : (
           <p class="mt-8 rounded-lg bg-[#f4f2e9] p-6 text-[#52616d]">
             Todavía no hay noticias publicadas.

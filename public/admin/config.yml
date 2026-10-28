@@ -33,5 +33,6 @@ collections:
       - { label: Imagen, name: image, widget: image, required: false }
       - { label: Texto alternativo de la imagen, name: imageAlt, widget: string, required: false }
       - { label: Fecha de publicación, name: publishDate, widget: datetime, required: false }
+      - { label: Fecha de caducidad, name: expirationDate, widget: datetime, type: date, required: false }
       - { label: Autor, name: author, widget: string, required: false }
       - { label: Contenido, name: body, widget: markdown }

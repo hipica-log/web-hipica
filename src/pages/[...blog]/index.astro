@@ -92,9 +92,23 @@ const breadcrumbs = [
 <Layout metadata={metadata}>
   <StructuredData slot="head" schema={articleSchema} />
   <Breadcrumbs bar hideCurrent items={breadcrumbs} />
-  <SinglePost post={{ ...post, image: image }} url={url}>
-    {post.Content && <post.Content />}
-  </SinglePost>
-  <ToBlogLink />
-  <RelatedPosts post={post} />
+  <div
+    data-expiration-page
+    data-expiration-date={post.expirationDate?.toISOString().slice(0, 10)}
+  >
+    <SinglePost post={{ ...post, image: image }} url={url}>
+      {post.Content && <post.Content />}
+    </SinglePost>
+    <ToBlogLink />
+    <RelatedPosts post={post} />
+  </div>
+  <section class="hidden px-5 py-16 text-center" data-expired-notice>
+    <div class="mx-auto max-w-xl rounded-lg bg-[#f4f2e9] p-8">
+      <h1 class="text-2xl font-bold text-[#234a68]">Esta noticia ya no está disponible</h1>
+      <p class="mt-3 text-[#52616d]">Su fecha de vigencia ha finalizado.</p>
+      <a href="/novedades" class="mt-5 inline-flex font-semibold text-[#234a68] underline underline-offset-4">
+        Ver las novedades vigentes
+      </a>
+    </div>
+  </section>
 </Layout>

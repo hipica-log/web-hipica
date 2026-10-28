@@ -30,4 +30,7 @@ const { metadata } = Astro.props;
     <slot />
   </main>
   {Astro.slots.has('footer') ? <slot name="footer" /> : <Footer {...footerData} theme="dark" />}
+  <script>
+    import '~/utils/post-expiry';
+  </script>
 </Layout>

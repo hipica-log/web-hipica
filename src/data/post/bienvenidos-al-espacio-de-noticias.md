@@ -7,6 +7,7 @@ tags:
   - 'Hípica'
 image: '~/assets/images/noticias-novedades.jpg'
 publishDate: 2026-10-14T09:00:00.000Z
+expirationDate: null
 author: 'Hípica de Logroño'
 ---
 

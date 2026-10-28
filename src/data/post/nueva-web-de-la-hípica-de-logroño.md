@@ -8,6 +8,7 @@ tags:
 image: /uploads/noticias/Centro ecuestre bajo el sol.png
 imageAlt: Vista de las instalaciones de la Hípica de Logroño
 publishDate: 2026-10-14T10:00:00
+expirationDate: null
 author: Hípica de Logroño
 ---
 
