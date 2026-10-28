@@ -20,6 +20,9 @@ const latestPostsWithImages = await Promise.all(
   latestPosts.map(async (post) => ({ post, image: await findImage(post.image) }))
 );
 
+// Sustituye esta URL por el enlace de invitación cuando el canal esté creado.
+const whatsappChannelUrl = 'https://whatsapp.com/channel/REEMPLAZAR_POR_EL_ENLACE_DEL_CANAL';
+
 const metadata = {
   title: 'Hípica de Logroño',
   description: 'Conoce la Hípica de Logroño, sus instalaciones y su actividad ecuestre.',
@@ -125,6 +128,17 @@ const cards: {
             class="inline-flex min-h-12 items-center justify-center rounded-md bg-[#dfb23e] px-6 py-3 font-bold text-[#234a68] transition hover:bg-[#edc85e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Descubre la Hípica
+          </a>
+        </div>
+        <div class="mt-4 flex justify-center">
+          <a
+            href={whatsappChannelUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-14 flex-col items-center justify-center rounded-md bg-[#25D366] px-8 py-4 text-white transition hover:bg-[#20ba5a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <span class="text-lg font-bold">Canal de WhatsApp</span>
+            <span class="mt-1 text-sm font-medium">Síguenos para estar al día de las novedades</span>
           </a>
         </div>
       </div>
