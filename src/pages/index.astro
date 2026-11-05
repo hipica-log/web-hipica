@@ -9,6 +9,7 @@ import actividadesImage from '~/assets/images/actividades-deportivas.png';
 import ocioImage from '~/assets/images/ocio-restauracion.png';
 import normativaImage from '~/assets/images/normativa-hipica.png';
 import contactoImage from '~/assets/images/contacto-hipica.png';
+import whatsappChannelImage from '~/assets/images/canal-whatsapp.png';
 import Image from '~/components/common/Image.astro';
 import { findImage } from '~/utils/images';
 import { fetchPosts } from '~/utils/blog';
@@ -21,7 +22,7 @@ const latestPostsWithImages = await Promise.all(
 );
 
 // Sustituye esta URL por el enlace de invitación cuando el canal esté creado.
-const whatsappChannelUrl = 'https://whatsapp.com/channel/REEMPLAZAR_POR_EL_ENLACE_DEL_CANAL';
+const whatsappChannelUrl = 'https://whatsapp.com/channel/0029VbDTo95LdQefCExaz20q';
 
 const metadata = {
   title: 'Hípica de Logroño',
@@ -130,16 +131,23 @@ const cards: {
             Descubre la Hípica
           </a>
         </div>
-        <div class="mt-4 flex justify-center">
+        <div class="mt-4 flex flex-col items-center">
           <a
             href={whatsappChannelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex min-h-14 flex-col items-center justify-center rounded-md bg-[#25D366] px-8 py-4 text-white transition hover:bg-[#20ba5a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            class="inline-flex min-h-14 flex-col items-center justify-center rounded-md bg-[#1fbd61] px-8 py-4 text-white transition hover:bg-[#19a955] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             <span class="text-lg font-bold">Canal de WhatsApp</span>
             <span class="mt-1 text-sm font-medium">Síguenos para estar al día de las novedades</span>
+            <img
+            src={whatsappChannelImage.src}
+            alt="Código QR del canal de WhatsApp de CDM Hípica de Logroño"
+            class="mt-3 h-auto w-60 max-w-full rounded-md"
+            loading="lazy"
+          />
           </a>
+
         </div>
       </div>
     </div>
