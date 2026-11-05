@@ -8,7 +8,7 @@ tags:
 image: '~/assets/images/san-gregorio-2026.png'
 imageAlt: 'Cartel del IV Trofeo de San Gregorio de piragüismo 2026'
 publishDate: 2026-10-20T09:00:00.000Z
-expirationDate: null
+expirationDate: 2026-10-21T09:00:00.000Z
 author: 'Hípica de Logroño'
 ---
 

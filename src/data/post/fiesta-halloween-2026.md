@@ -8,7 +8,7 @@ tags:
 image: '~/assets/images/CARTEL HALLOWEEN.png'
 imageAlt: 'Cartel de la Fiesta de Halloween 2026 de la Hípica de Logroño'
 publishDate: 2026-10-30T10:00:00.000Z
-expirationDate: null
+expirationDate: 2026-11-02T10:00:00.000Z
 author: 'Hípica de Logroño'
 ---
 
