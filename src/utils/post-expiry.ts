@@ -58,5 +58,8 @@ const scheduleNextCheck = () => {
   }, nextMidnight.getTime() - now.getTime() + 50);
 };
 
+// ClientRouter swaps pages without reloading this module. Reapply the filter
+// after each client-side navigation as well as on the initial page.
+document.addEventListener('astro:page-load', updateVisibility);
 updateVisibility();
 scheduleNextCheck();
