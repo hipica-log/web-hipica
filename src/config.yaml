@@ -1,6 +1,6 @@
 site:
   name: Hípica de Logroño
-  site: 'https://astrowind.vercel.app'
+  site: 'https://hipicalogrono.es'
   base: '/'
   trailingSlash: false
 
