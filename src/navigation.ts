@@ -34,7 +34,7 @@ export const footerData = {
     {
       title: 'Contacto',
       links: [
-        { text: 'Cómo llegar y horarios', href: getPermalink('/contacto') },
+        { text: 'Contacto y horarios', href: getPermalink('/contacto') },
       ],
     },
   ],
