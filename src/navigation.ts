@@ -40,8 +40,6 @@ export const footerData = {
   ],
   secondaryLinks: [
     { text: 'Aviso legal', href: getPermalink('/terms') },
-    { text: 'Privacidad', href: getPermalink('/privacy') },
-    { text: 'Cookies', href: getPermalink('/cookies') },
   ],
   socialLinks: [
     // Deja solo las redes que tengan, con su URL real
